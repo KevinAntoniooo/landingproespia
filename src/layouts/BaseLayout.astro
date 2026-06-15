@@ -1,0 +1,156 @@
+---
+// BaseLayout.astro — SEO, fonts, viewport, shared shell
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const { title = "Pro Espía — Seguridad Inteligente en Rancagua", description = "Protegemos tu hogar o empresa con central de monitoreo 24/7 en la Región de O'Higgins. Cámaras, alarmas y respuesta técnica inmediata.", ogImage = "/assets/og-image.jpg" } = Astro.props;
+const canonical = Astro.props.canonical || Astro.url.origin + Astro.url.pathname;
+const siteName = "Pro Espía";
+const locale = "es_CL";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content={siteName} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="theme-color" content="#1e40af" />
+  <meta name="keywords" content="seguridad, monitoreo 24/7, alarmas, cámaras, Rancagua, Región de O'Higgins, central de monitoreo, protección hogar, seguridad empresas, disuasión, Pro Espía, alarmas Rancagua, cámaras seguridad, videovigilancia" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(ogImage, Astro.url.origin).href} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:locale" content={locale} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, Astro.url.origin).href} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/favicon-icon.png" />
+  <link rel="apple-touch-icon" href="/assets/favicon-icon.png" />
+
+  <!-- Preconnect hints -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonical} />
+
+  <slot name="head" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://proespia.cl/#organization",
+    "name": "Pro Espía",
+    "url": "https://proespia.cl",
+    "logo": "https://proespia.cl/assets/logo-proespia.png",
+    "image": "https://proespia.cl/assets/og-image.jpg",
+    "description": "Central de monitoreo 24/7 en Rancagua, Región de O'Higgins. Protegemos hogares, comercios e industrias con tecnología de punta.",
+    "telephone": "+56 722 266 383",
+    "email": "proyectos@proespia.cl",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "01001 Uruguay",
+      "addressLocality": "Rancagua",
+      "addressRegion": "Región de O'Higgins",
+      "addressCountry": "CL"
+    },
+    "openingHours": "Mo-Su 00:00-24:00",
+    "areaServed": {
+      "@type": "City",
+      "name": "Rancagua"
+    },
+    "priceRange": "$$",
+    "sameAs": [
+      "https://wa.me/56722266383"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://proespia.cl/#website",
+    "url": "https://proespia.cl",
+    "name": "Pro Espía",
+    "inLanguage": "es-CL",
+    "description": "Central de monitoreo 24/7 en Rancagua",
+    "publisher": { "@id": "https://proespia.cl/#organization" },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://proespia.cl/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  ]
+  </script>
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+
+  <script>
+    // Cerrar menú móvil al hacer clic en un enlace
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('.nav-links a');
+      if (link) {
+        document.querySelector('.nav-links')?.classList.remove('is-open');
+      }
+    });
+
+    // Scroll Reveal — Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+---
+// ServiciosGrid.astro — 4 pilares con tarjetas y hover elevación
+---
+
+<section class="servicios section" id="servicios">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Nuestra oferta</span>
+      <h2>Los <span>4 Pilares</span> de Seguridad Pro Espía</h2>
+      <p>Tecnología de punta, inteligencia artificial y respuesta humana inmediata para proteger tu patrimonio 24/7</p>
+    </div>
+    <div class="servicios__grid">
+      <article class="servicio-card reveal reveal-delay-1">
+        <div class="servicio-card__icon">
+          <i class="fa-solid fa-satellite-dish"></i>
+        </div>
+        <h3>Monitoreo 24 Horas</h3>
+        <p>Central inteligente operativa los 365 días del año. Supervisión técnica permanente con analítica de video en tiempo real sobre tus sistemas de alarma y videovigilancia.</p>
+        <ul class="servicio-card__list">
+          <li><i class="fa-solid fa-circle-check"></i> Operación ininterrumpida</li>
+          <li><i class="fa-solid fa-circle-check"></i> Alertas inmediatas al móvil</li>
+          <li><i class="fa-solid fa-circle-check"></i> Backup de energía e internet</li>
+        </ul>
+      </article>
+      <article class="servicio-card reveal reveal-delay-2">
+        <div class="servicio-card__icon">
+          <i class="fa-solid fa-user-secret"></i>
+        </div>
+        <h3>Detección de Intrusos</h3>
+        <p>Sensores perimetrales y análisis de video con inteligencia artificial que identifican amenazas reales y descartan falsas alarmas al instante, antes de que el intruso ingrese.</p>
+        <ul class="servicio-card__list">
+          <li><i class="fa-solid fa-circle-check"></i> IA con análisis predictivo</li>
+          <li><i class="fa-solid fa-circle-check"></i> Sensor perimetral multicapa</li>
+          <li><i class="fa-solid fa-circle-check"></i> Cero falsos positivos</li>
+        </ul>
+      </article>
+      <article class="servicio-card reveal reveal-delay-3" style="box-shadow:0 0 15px rgba(239,68,68,0.07)">
+        <div class="servicio-card__icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3>Prevención de Delitos</h3>
+        <p>Efecto disuasivo comprobado con cámaras visibles, cartelería profesional, sirenas de alta potencia y voceo directo. Respuesta inmediata que reduce drásticamente el riesgo de robo.</p>
+        <ul class="servicio-card__list">
+          <li><i class="fa-solid fa-circle-check"></i> Audio Bidireccional de Alta Potencia (Voceo Táctico en Vivo) para intervenir la escena de inmediato</li>
+          <li><i class="fa-solid fa-circle-check"></i> Incluye Placas y Letreros Disuasivos Exteriores de Alta Visibilidad Pro Espía</li>
+        </ul>
+      </article>
+      <article class="servicio-card reveal reveal-delay-4">
+        <div class="servicio-card__icon">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <h3>Respaldo Técnico</h3>
+        <p>Ingenieros especializados en seguridad electrónica. Mantención preventiva programada y asistencia remota o presencial con despacho del técnico más cercano a tu propiedad.</p>
+        <ul class="servicio-card__list">
+          <li><i class="fa-solid fa-circle-check"></i> Técnicos certificados OS-10</li>
+          <li><i class="fa-solid fa-circle-check"></i> Mantención preventiva incluida</li>
+          <li><i class="fa-solid fa-circle-check"></i> Flota con GPS en tiempo real</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .servicios__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .servicio-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .servicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 0 0;
+    border-color: transparent var(--blue-800) transparent transparent;
+    transition: border-width 0.4s ease;
+  }
+
+  .servicio-card:hover::before {
+    border-width: 0 60px 60px 0;
+  }
+
+  .servicio-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border-color: rgba(30, 64, 175, 0.15);
+    background: var(--bg-card-hover);
+  }
+
+  .servicio-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 64, 175, 0.08);
+    border: 1px solid rgba(30, 64, 175, 0.12);
+    margin-bottom: 0.25rem;
+  }
+
+  .servicio-card__icon i {
+    font-size: 1.6rem;
+    color: var(--blue-800);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .servicio-card:hover .servicio-card__icon i {
+    transform: scale(1.25) rotate(-8deg);
+  }
+
+  .servicio-card h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .servicio-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    flex-grow: 1;
+  }
+
+  .servicio-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .servicio-card__list li {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .servicio-card__list li i {
+    font-size: 0.75rem;
+    color: var(--blue-800);
+  }
+
+  @media (max-width: 768px) {
+    .servicios__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,662 @@
+---
+// admin/trabajos.astro — Panel de administración de vacantes (localStorage)
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import trabajos from "../../data/trabajos.json";
+---
+
+<BaseLayout
+  title="Administrar Vacantes | Pro Espía"
+  description="Panel de administración de ofertas laborales."
+  ogImage="/assets/admin-og.jpg"
+>
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+  <section class="admin-header">
+    <div class="container">
+      <div class="admin-header__inner">
+        <div>
+          <h1>Panel de <span>Vacantes</span></h1>
+          <p>Administra las ofertas laborales activas de Pro Espía. Los cambios se guardan automáticamente en el navegador.</p>
+        </div>
+        <button class="btn btn--primary" id="addJobBtn">
+          <i class="fa-solid fa-plus"></i>
+          Nueva Vacante
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-toolbar">
+    <div class="container">
+      <div class="admin-toolbar__inner">
+        <div class="admin-search">
+          <i class="fa-solid fa-search"></i>
+          <input type="text" id="searchInput" class="form-input" placeholder="Buscar vacantes..." />
+        </div>
+        <div class="admin-stats" id="adminStats">
+          <span>Cargando...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-list section">
+    <div class="container">
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="jobsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Ubicación</th>
+              <th>Tipo</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="jobsBody">
+            <tr><td colspan="7" class="admin-loading">Cargando vacantes...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for Add/Edit -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="jobModal">
+      <div class="modal__header">
+        <h3 id="modalTitle">Nueva Vacante</h3>
+        <button class="modal__close" id="modalClose" aria-label="Cerrar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form class="modal__form" id="jobForm">
+        <input type="hidden" id="editId" value="" />
+
+        <div class="modal__row">
+          <div class="form-field">
+            <label>Título del cargo *</label>
+            <input type="text" class="form-input" id="jobTitulo" required placeholder="Ej: Técnico en Seguridad" />
+          </div>
+          <div class="form-field">
+            <label>Ubicación *</label>
+            <input type="text" class="form-input" id="jobUbicacion" required placeholder="Ej: Rancagua" />
+          </div>
+        </div>
+
+        <div class="modal__row">
+          <div class="form-field">
+            <label>Tipo de jornada *</label>
+            <select class="form-select" id="jobTipo" required>
+              <option value="Tiempo Completo">Tiempo Completo</option>
+              <option value="Medio Tiempo">Medio Tiempo</option>
+              <option value="Turnos Rotativos">Turnos Rotativos</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Práctica">Práctica</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Modalidad *</label>
+            <select class="form-select" id="jobModalidad" required>
+              <option value="Presencial">Presencial</option>
+              <option value="Remoto">Remoto</option>
+              <option value="Híbrido">Híbrido</option>
+              <option value="Presencial / Terreno">Presencial / Terreno</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Resumen del cargo *</label>
+          <textarea class="form-textarea" id="jobResumen" required placeholder="Breve descripción del cargo..." style="min-height:70px;"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label>Requisitos (uno por línea) *</label>
+          <textarea class="form-textarea" id="jobRequisitos" required placeholder="Experiencia mínima de 2 años...&#10;Licencia de conducir clase B&#10;Disponibilidad inmediata" style="min-height:100px;"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label>Ofrecemos (uno por línea) *</label>
+          <textarea class="form-textarea" id="jobOfrecemos" required placeholder="Sueldo competitivo + bonos&#10;Contrato indefinido&#10;Capacitación continua" style="min-height:100px;"></textarea>
+        </div>
+
+        <div class="modal__actions">
+          <button type="button" class="btn btn--ghost" id="modalCancel">Cancelar</button>
+          <button type="submit" class="btn btn--primary" id="modalSave">
+            <i class="fa-regular fa-floppy-disk"></i>
+            Guardar Vacante
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden data element: seeded jobs from build -->
+  <script id="jobsData" type="application/json">{JSON.stringify(trabajos)}</script>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+</BaseLayout>
+
+<style>
+  /* Admin Header */
+  .admin-header {
+    padding: calc(var(--header-h) + 2rem) 0 1.5rem;
+    background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .admin-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-header h1 {
+    font-size: 1.8rem;
+    font-weight: 900;
+  }
+
+  .admin-header h1 span {
+    background: linear-gradient(135deg, var(--blue-800), var(--blue-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .admin-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+
+  /* Toolbar */
+  .admin-toolbar {
+    padding: 1rem 0;
+    background: var(--navy-850);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .admin-toolbar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-search {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+  }
+
+  .admin-search i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .admin-search .form-input {
+    padding-left: 2.5rem;
+  }
+
+  .admin-stats {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .admin-stats strong { color: var(--text-light); }
+
+  /* Table */
+  .admin-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--navy-800);
+  }
+
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .admin-table th {
+    text-align: left;
+    padding: 1rem 1.2rem;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .admin-table td {
+    padding: 0.9rem 1.2rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+  }
+
+  .admin-table tr:last-child td { border-bottom: none; }
+
+  .admin-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+  .admin-loading {
+    text-align: center;
+    padding: 3rem !important;
+    color: var(--text-dim);
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .status-badge--activo {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .status-badge--inactivo {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .btn-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .btn-icon:hover { background: rgba(255, 255, 255, 0.08); color: var(--text-light); }
+  .btn-icon--edit:hover { border-color: var(--blue-800); color: var(--blue-800); }
+  .btn-icon--delete:hover { border-color: var(--danger); color: var(--danger); }
+  .btn-icon--toggle:hover { border-color: var(--success); color: var(--success); }
+
+  .actions-cell {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+  }
+
+  .modal-overlay.is-open { display: flex; }
+
+  .modal {
+    background: var(--navy-800);
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 640px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    animation: modalIn 0.25s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal__header h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+
+  .modal__close {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .modal__close:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-light); }
+
+  .modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .modal__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .modal__form label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .modal__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 90px;
+    right: 24px;
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 3000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--transition);
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .toast--success {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: var(--success);
+  }
+
+  .toast--error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: var(--danger);
+  }
+
+  @media (max-width: 768px) {
+    .modal { padding: 1.5rem; }
+    .modal__row { grid-template-columns: 1fr; }
+    .admin-header__inner { flex-direction: column; }
+    .admin-search { max-width: 100%; }
+  }
+</style>
+
+<script>
+  // ======== DATA LAYER ========
+  const STORAGE_KEY = 'proespia_trabajos';
+  const DEFAULT_JOBS = JSON.parse(document.getElementById('jobsData')?.textContent || '[]');
+
+  function getJobs() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) { /* ignore */ }
+    // Seed with defaults
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_JOBS));
+    return [...DEFAULT_JOBS];
+  }
+
+  function saveJobs(jobs) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(jobs));
+  }
+
+  function nextId(jobs) {
+    return jobs.length > 0 ? Math.max(...jobs.map(j => j.id)) + 1 : 1;
+  }
+
+  // ======== STATE ========
+  let jobs = getJobs();
+  let searchTerm = '';
+
+  // ======== DOM REFS ========
+  const tbody = document.getElementById('jobsBody');
+  const searchInput = document.getElementById('searchInput');
+  const adminStats = document.getElementById('adminStats');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const jobForm = document.getElementById('jobForm');
+  const editId = document.getElementById('editId');
+  const jobTitulo = document.getElementById('jobTitulo');
+  const jobUbicacion = document.getElementById('jobUbicacion');
+  const jobTipo = document.getElementById('jobTipo');
+  const jobModalidad = document.getElementById('jobModalidad');
+  const jobResumen = document.getElementById('jobResumen');
+  const jobRequisitos = document.getElementById('jobRequisitos');
+  const jobOfrecemos = document.getElementById('jobOfrecemos');
+  const modalSave = document.getElementById('modalSave');
+  const modalCancel = document.getElementById('modalCancel');
+  const modalClose = document.getElementById('modalClose');
+  const addJobBtn = document.getElementById('addJobBtn');
+  const toast = document.getElementById('toast');
+
+  // ======== RENDER ========
+  function render() {
+    const filtered = jobs.filter(j =>
+      j.titulo.toLowerCase().includes(searchTerm) ||
+      j.ubicacion.toLowerCase().includes(searchTerm)
+    );
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" class="admin-loading">No se encontraron vacantes</td></tr>`;
+    } else {
+      tbody.innerHTML = filtered.map(job => `
+        <tr data-id="${job.id}" class="job-row">
+          <td class="cell-id">${job.id}</td>
+          <td class="cell-titulo">${escapeHtml(job.titulo)}</td>
+          <td class="cell-ubicacion"><span class="ubicacion-trunc">${escapeHtml(job.ubicacion)}</span></td>
+          <td class="cell-tipo">${escapeHtml(job.tipo)}</td>
+          <td class="cell-fecha">${formatDate(job.fecha)}</td>
+          <td class="cell-estado">
+            <span class="status-badge status-badge--${job.activo ? 'activo' : 'inactivo'}">
+              ${job.activo ? 'Activa' : 'Inactiva'}
+            </span>
+          </td>
+          <td class="cell-acciones">
+            <div class="actions-cell">
+              <button class="btn-icon btn-icon--toggle" onclick="event.stopPropagation(); toggleJob(${job.id})" title="${job.activo ? 'Desactivar' : 'Activar'}">
+                <i class="fa-solid fa-${job.activo ? 'eye-slash' : 'eye'}"></i>
+              </button>
+              <button class="btn-icon btn-icon--edit" onclick="event.stopPropagation(); editJob(${job.id})" title="Editar">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="btn-icon btn-icon--delete" onclick="event.stopPropagation(); deleteJob(${job.id})" title="Eliminar">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    const activas = jobs.filter(j => j.activo).length;
+    const total = jobs.length;
+    adminStats.innerHTML = `<strong>${activas}</strong> activas · <strong>${total}</strong> total`;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
+
+  // ======== ACTIONS ========
+  function toggleJob(id) {
+    const job = jobs.find(j => j.id === id);
+    if (job) {
+      job.activo = !job.activo;
+      saveJobs(jobs);
+      render();
+      showToast(`Vacante "${job.titulo}" ${job.activo ? 'activada' : 'desactivada'}`, 'success');
+    }
+  }
+
+  function deleteJob(id) {
+    const job = jobs.find(j => j.id === id);
+    if (!job) return;
+    if (!confirm(`¿Eliminar la vacante "${job.titulo}"?`)) return;
+    jobs = jobs.filter(j => j.id !== id);
+    saveJobs(jobs);
+    render();
+    showToast(`Vacante "${job.titulo}" eliminada`, 'success');
+  }
+
+  function editJob(id) {
+    const job = jobs.find(j => j.id === id);
+    if (!job) return;
+    editId.value = job.id;
+    jobTitulo.value = job.titulo;
+    jobUbicacion.value = job.ubicacion;
+    jobTipo.value = job.tipo;
+    jobModalidad.value = job.modalidad;
+    jobResumen.value = job.resumen;
+    jobRequisitos.value = job.requisitos.join('\n');
+    jobOfrecemos.value = job.ofrecemos.join('\n');
+    modalTitle.textContent = 'Editar Vacante';
+    modalSave.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Actualizar Vacante';
+    openModal();
+  }
+
+  function openModal() {
+    modalOverlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    jobForm.reset();
+    editId.value = '';
+    modalTitle.textContent = 'Nueva Vacante';
+    modalSave.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Guardar Vacante';
+  }
+
+  function showToast(msg, type = 'success') {
+    toast.textContent = msg;
+    toast.className = `toast toast--${type} show`;
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  // ======== EVENT LISTENERS ========
+  searchInput.addEventListener('input', (e) => {
+    searchTerm = e.target.value.toLowerCase();
+    render();
+  });
+
+  addJobBtn.addEventListener('click', () => {
+    editId.value = '';
+    jobForm.reset();
+    modalTitle.textContent = 'Nueva Vacante';
+    modalSave.innerHTML = '<i class="fa-regular fa-floppy-disk"></i> Guardar Vacante';
+    openModal();
+  });
+
+  modalCancel.addEventListener('click', closeModal);
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  jobForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const id = editId.value ? parseInt(editId.value) : nextId(jobs);
+    const requisitos = jobRequisitos.value.split('\n').map(s => s.trim()).filter(Boolean);
+    const ofrecemos = jobOfrecemos.value.split('\n').map(s => s.trim()).filter(Boolean);
+
+    const jobData = {
+      id,
+      titulo: jobTitulo.value.trim(),
+      ubicacion: jobUbicacion.value.trim(),
+      tipo: jobTipo.value,
+      modalidad: jobModalidad.value,
+      resumen: jobResumen.value.trim(),
+      requisitos,
+      ofrecemos,
+      fecha: new Date().toISOString().split('T')[0],
+      activo: true
+    };
+
+    if (editId.value) {
+      // Edit existing
+      const idx = jobs.findIndex(j => j.id === id);
+      if (idx !== -1) {
+        jobs[idx] = { ...jobs[idx], ...jobData };
+      }
+      showToast('Vacante actualizada correctamente', 'success');
+    } else {
+      // New
+      jobs.push(jobData);
+      showToast('Vacante creada correctamente', 'success');
+    }
+
+    saveJobs(jobs);
+    render();
+    closeModal();
+  });
+
+  // ======== INIT ========
+  render();
+</script>

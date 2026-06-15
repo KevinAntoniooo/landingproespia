@@ -1,0 +1,297 @@
+---
+// Footer.astro — Contacto, formulario, datos oficiales, mapa
+---
+
+<footer class="footer" id="contacto">
+  <div class="footer__top">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="/assets/logo-proespia.png" alt="Pro Espía" class="footer__logo" />
+          <p class="footer__desc">Somos la central de monitoreo más avanzada de la Región de O'Higgins. Protegemos hogares, comercios e industrias con tecnología de punta, inteligencia artificial y respuesta humana 24/7.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://wa.me/56722266383" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Servicios</h4>
+          <a href="/#servicios">Monitoreo 24/7</a>
+          <a href="/#servicios">Detección de Intrusos</a>
+          <a href="/#servicios">Prevención de Delitos</a>
+          <a href="/#servicios">Respaldo Técnico</a>
+          <a href="/#central">Central de Monitoreo</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="https://wa.me/56722266383"><i class="fa-solid fa-phone"></i> +56 722 266 383</a>
+          <a href="mailto:proyectos@proespia.cl"><i class="fa-solid fa-envelope"></i> proyectos@proespia.cl</a>
+          <a href="#"><i class="fa-solid fa-location-dot"></i> 01001 Uruguay, Rancagua</a>
+        </div>
+
+        <div class="footer__form-col">
+          <h4>Contáctanos</h4>
+          <form class="footer__form" id="footerForm">
+            <div class="footer__form-row">
+              <input type="text" class="form-input" placeholder="Nombre" required />
+              <input type="tel" class="form-input" placeholder="Teléfono" required />
+            </div>
+            <input type="email" class="form-input" placeholder="Correo electrónico" required />
+            <textarea class="form-textarea" placeholder="¿Cómo podemos ayudarte?" required></textarea>
+            <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">
+              <i class="fa-solid fa-paper-plane"></i>
+              Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="footer__bottom-inner">
+        <span>&copy; 2026 Pro Espía. Todos los derechos reservados.</span>
+        <span>Seguridad Inteligente en Rancagua — Región de O'Higgins</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--bg-section-alt);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer__top {
+    padding: 4rem 0 2rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    gap: 2rem;
+  }
+
+  .footer__logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: 1rem;
+  }
+
+  .footer__desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+    max-width: 38ch;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .footer__social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy-700);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-dim);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+
+  .footer__social a:hover {
+    background: rgba(30, 64, 175, 0.1);
+    border-color: rgba(30, 64, 175, 0.2);
+    color: var(--blue-800);
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  .footer__col h4,
+  .footer__form-col h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer__col a {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer__col a:hover {
+    color: var(--blue-800);
+  }
+
+  .footer__col a i {
+    width: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .footer__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .footer__form .form-input,
+  .footer__form .form-textarea {
+    font-size: 0.88rem;
+  }
+
+  .footer__bottom {
+    border-top: 1px solid var(--border-color);
+    padding: 1.2rem 0;
+  }
+
+  .footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .footer__col h4,
+  .footer__form-col h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer__col a {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer__social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+
+  .footer__desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+    max-width: 38ch;
+  }
+
+  .footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .footer__col h4,
+  .footer__form-col h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer__col a {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  @media (max-width: 968px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 1.5rem;
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('footerForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Mensaje enviado';
+    btn.style.pointerEvents = 'none';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.pointerEvents = ''; }, 3000);
+  });
+</script>

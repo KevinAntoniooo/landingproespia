@@ -1,0 +1,29 @@
+---
+// index.astro — Landing page principal Pro Espía
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ServiciosGrid from "../components/ServiciosGrid.astro";
+import ProcesoSection from "../components/ProcesoSection.astro";
+import CasosDisuasion from "../components/CasosDisuasion.astro";
+import CentralMonitoreo from "../components/CentralMonitoreo.astro";
+import Testimonios from "../components/Testimonios.astro";
+import Contacto from "../components/Contacto.astro";
+import CoverageMap from "../components/CoverageMap.astro";
+---
+
+<BaseLayout
+  title="Pro Espía — Seguridad Inteligente en Rancagua | Monitoreo 24/7"
+  description="Protegemos tu hogar o empresa en la Región de O'Higgins con central de monitoreo 24/7, cámaras con IA, detección de intrusos y conexión Alpha III con Carabineros."
+>
+  <Hero />
+  <ServiciosGrid />
+  <CentralMonitoreo />
+  <ProcesoSection />
+  <CasosDisuasion />
+  <Testimonios />
+  <CoverageMap />
+  <Contacto />
+  <!-- <TrabajaSection /> -->
+</BaseLayout>
+
+

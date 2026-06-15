@@ -1,0 +1,645 @@
+---
+// trabaja-con-nosotros.astro — Empleos y postulación
+import BaseLayout from "../layouts/BaseLayout.astro";
+import trabajos from "../data/trabajos.json";
+
+const trabajosActivos = trabajos.filter((t) => t.activo);
+---
+
+<BaseLayout
+  title="Trabaja con Nosotros | Pro Espía"
+  description="Únete al equipo de seguridad más avanzado de la Región de O'Higgins. Revisa nuestras ofertas laborales y postula con tu CV."
+>
+  <section class="hero-page">
+    <div class="container">
+      <h1>Trabaja con <span>Nosotros</span></h1>
+      <p>Forma parte del equipo líder en seguridad inteligente de la Región de O'Higgins. Buscamos talento comprometido con la protección y la tecnología.</p>
+    </div>
+  </section>
+
+  <!-- BENEFITS BANNER -->
+  <section class="benefits-bar">
+    <div class="container">
+      <div class="benefits-bar__grid">
+        <div class="benefit-item">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Contrato formal</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Capacitación permanente</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Estabilidad laboral</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+          <span>Seguros y beneficios</span>
+        </div>
+        <div class="benefit-item">
+          <i class="fa-solid fa-arrow-up-right-dots"></i>
+          <span>Crecimiento profesional</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOB LISTINGS -->
+  <section class="jobs section" id="jobs">
+    <div class="container">
+      <div class="section-header">
+        <h2>Vacantes <span>disponibles</span></h2>
+        <p>Revisa nuestras ofertas activas en Rancagua y la Región de O'Higgins</p>
+      </div>
+      <div class="jobs__list" id="jobsContainer">
+        {
+          trabajosActivos.length > 0 ? (
+            trabajosActivos.map((job) => (
+              <article class="job-card">
+                <div class="job-card__header">
+                  <div>
+                    <h3>{job.titulo}</h3>
+                    <div class="job-card__meta">
+                      <span><i class="fa-solid fa-location-dot"></i> {job.ubicacion}</span>
+                      <span><i class="fa-solid fa-clock"></i> {job.tipo}</span>
+                      <span><i class="fa-solid fa-briefcase"></i> {job.modalidad}</span>
+                    </div>
+                  </div>
+                  <span class="job-card__badge">Activa</span>
+                </div>
+                <p class="job-card__summary">{job.resumen}</p>
+                <div class="job-card__details">
+                  <div class="job-card__section">
+                    <h4><i class="fa-solid fa-circle-check"></i> Requisitos</h4>
+                    <ul>
+                      {job.requisitos.map((req) => <li><i class="fa-solid fa-chevron-right"></i> {req}</li>)}
+                    </ul>
+                  </div>
+                  <div class="job-card__section">
+                    <h4><i class="fa-solid fa-gift"></i> Ofrecemos</h4>
+                    <ul>
+                      {job.ofrecemos.map((ben) => <li><i class="fa-solid fa-chevron-right"></i> {ben}</li>)}
+                    </ul>
+                  </div>
+                </div>
+                <button class="btn btn--primary postular-btn" data-job="{job.titulo}">
+                  <i class="fa-solid fa-paper-plane"></i>
+                  Postular a esta vacante
+                </button>
+              </article>
+            ))
+          ) : (
+            <div class="jobs__empty">
+              <i class="fa-solid fa-inbox"></i>
+              <h3>No hay vacantes activas</h3>
+              <p>No tenemos ofertas disponibles en este momento. Síguenos en redes sociales para conocer futuras oportunidades.</p>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="apply section bg-dark-alt" id="apply-form">
+    <div class="container">
+      <div class="apply__card">
+        <div class="section-header">
+          <h2>Formula tu <span>postulación</span></h2>
+          <p>Completa el formulario y adjunta tu CV. Te contactaremos si tu perfil se ajusta a alguna vacante.</p>
+        </div>
+        <form class="apply__form" id="applyForm">
+          <div class="apply__row">
+            <div class="form-field">
+              <label>Nombre completo *</label>
+              <input type="text" class="form-input" id="applyName" required placeholder="Ej: María González" />
+            </div>
+            <div class="form-field">
+              <label>Correo electrónico *</label>
+              <input type="email" class="form-input" id="applyEmail" required placeholder="correo@ejemplo.cl" />
+            </div>
+          </div>
+          <div class="apply__row">
+            <div class="form-field">
+              <label>Teléfono *</label>
+              <input type="tel" class="form-input" id="applyPhone" required placeholder="+56 9 1234 5678" />
+            </div>
+            <div class="form-field">
+              <label>Vacante de interés</label>
+              <select class="form-select" id="applyJob">
+                <option value="">Selecciona una vacante</option>
+                {
+                  trabajosActivos.map((job) => (
+                    <option value={job.titulo}>{job.titulo}</option>
+                  ))
+                }
+                <option value="postulacion-espontanea">Postulación espontánea</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field full">
+            <label>Mensaje / Carta de presentación</label>
+            <textarea class="form-textarea" id="applyMessage" placeholder="Cuéntanos por qué te gustaría trabajar en Pro Espía..."></textarea>
+          </div>
+          <div class="form-field full">
+            <label>Adjuntar CV *</label>
+            <div class="file-upload" id="fileUpload">
+              <input type="file" id="applyCV" accept=".pdf,.doc,.docx,.jpg,.png" required />
+              <div class="file-upload__content">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Arrastra tu CV aquí o <strong>haz clic para buscar</strong></span>
+                <small>PDF, Word o Imagen — Máx 10MB</small>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg" style="width:100%;">
+            <i class="fa-solid fa-paper-plane"></i>
+            Enviar Postulación
+          </button>
+          <p class="apply__note">Al enviar, aceptas nuestra política de tratamiento de datos personales.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE SECTION -->
+  <section class="culture section bg-light">
+    <div class="container">
+      <div class="section-header">
+        <h2>Vivir <span>Pro Espía</span></h2>
+        <p>Somos un equipo comprometido con la seguridad, la innovación y el servicio. Conoce cómo es trabajar con nosotros.</p>
+      </div>
+      <div class="culture__grid">
+        <div class="culture-card">
+          <div class="culture-card__icon">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <h3>Trabajo en Equipo</h3>
+          <p>Colaboración multidisciplinaria entre operadores, técnicos y ejecutivos para ofrecer el mejor servicio de seguridad.</p>
+        </div>
+        <div class="culture-card">
+          <div class="culture-card__icon">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <h3>Innovación Constante</h3>
+          <p>Acceso a tecnología de última generación: IA, analítica de video, plataformas cloud y herramientas digitales.</p>
+        </div>
+        <div class="culture-card">
+          <div class="culture-card__icon">
+            <i class="fa-solid fa-certificate"></i>
+          </div>
+          <h3>Certificación OS-10</h3>
+          <p>Trabajamos bajo los más altos estándares de Carabineros de Chile. Tu desarrollo profesional está garantizado.</p>
+        </div>
+        <div class="culture-card">
+          <div class="culture-card__icon">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <h3>Bienestar Laboral</h3>
+          <p>Ambiente seguro, inclusivo y con oportunidades reales de crecimiento. Tu bienestar es nuestra prioridad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="cta-banner__content">
+        <h2>¿No encuentras lo que buscas?</h2>
+        <p>Envíanos tu CV igualmente. Siempre estamos abiertos a conocer talento nuevo.</p>
+        <a href="mailto:proyectos@proespia.cl?subject=Postulación Espontánea" class="btn btn--primary btn--lg">
+            <i class="fa-solid fa-envelope"></i>
+          Enviar CV por correo
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Page */
+  .hero-page {
+    padding: calc(var(--header-h) + 3rem) 0 3rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(30, 64, 175, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-page h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-page h1 span {
+    background: linear-gradient(135deg, var(--blue-800), var(--blue-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-page p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Benefits Bar */
+  .benefits-bar {
+    padding: 1.5rem 0;
+    background: var(--navy-850);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .benefits-bar__grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .benefit-item i {
+    color: var(--blue-800);
+    font-size: 1rem;
+  }
+
+  /* Job Card */
+  .jobs__list {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .job-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+
+  .job-card:hover {
+    border-color: rgba(30, 64, 175, 0.15);
+    box-shadow: var(--shadow-card);
+  }
+
+  .job-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .job-card__header h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+
+  .job-card__badge {
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: var(--success);
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .job-card__meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .job-card__meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .job-card__meta i { font-size: 0.75rem; color: var(--blue-800); }
+
+  .job-card__summary {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .job-card__details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .job-card__section h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .job-card__section h4 i { color: var(--blue-800); font-size: 0.8rem; }
+
+  .job-card__section ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .job-card__section li {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .job-card__section li i {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    margin-top: 0.35rem;
+  }
+
+  .jobs__empty {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: var(--navy-800);
+    border-radius: var(--radius-xl);
+  }
+
+  .jobs__empty i {
+    font-size: 3rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .jobs__empty h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .jobs__empty p {
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Apply Form */
+  .apply__card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--navy-800);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .apply__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .apply__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .full { grid-column: 1 / -1; }
+
+  .file-upload {
+    position: relative;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .file-upload:hover {
+    border-color: rgba(30, 64, 175, 0.2);
+    background: rgba(30, 64, 175, 0.03);
+  }
+
+  .file-upload input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-upload__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    pointer-events: none;
+  }
+
+  .file-upload__content i {
+    font-size: 2rem;
+    color: var(--blue-800);
+    margin-bottom: 0.3rem;
+  }
+
+  .file-upload__content strong { color: var(--blue-800); }
+
+  .file-upload__content small {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .apply__note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+  }
+
+  /* Culture */
+  .culture__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+
+  .culture-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.8rem 1.2rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+
+  .culture-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .culture-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(37, 99, 235, 0.1);
+    margin: 0 auto 1rem;
+  }
+
+  .culture-card__icon i {
+    font-size: 1.3rem;
+    color: var(--blue-700);
+  }
+
+  .culture-card h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .culture-card p {
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  /* CTA Banner */
+  .cta-banner {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+    text-align: center;
+  }
+
+  .cta-banner__content h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-banner__content p {
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 868px) {
+    .job-card__details { grid-template-columns: 1fr; }
+    .apply__row { grid-template-columns: 1fr; }
+    .culture__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .apply__card { padding: 1.5rem; }
+    .benefits-bar__grid { gap: 1rem; }
+    .culture__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Select job from URL or button click
+  const urlParams = new URLSearchParams(window.location.search);
+  const jobParam = urlParams.get('vacante');
+  const select = document.getElementById('applyJob');
+  if (jobParam && select) {
+    const opt = Array.from(select.options).find(o => o.value === jobParam);
+    if (opt) select.value = jobParam;
+    setTimeout(() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' }), 300);
+  }
+
+  // Click "Postular" buttons
+  document.querySelectorAll('.postular-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const job = btn.getAttribute('data-job');
+      if (job && select) {
+        select.value = job;
+        document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // File upload UI feedback
+  const fileInput = document.getElementById('applyCV');
+  const fileContent = document.querySelector('.file-upload__content');
+  if (fileInput && fileContent) {
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        const name = fileInput.files[0].name;
+        fileContent.innerHTML = `<i class="fa-solid fa-circle-check"></i><span><strong>${name}</strong> seleccionado</span>`;
+      }
+    });
+  }
+
+  // Form submit
+  document.getElementById('applyForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Postulación enviada con éxito';
+    btn.style.pointerEvents = 'none';
+
+    // Save to localStorage
+    const data = {
+      nombre: document.getElementById('applyName')?.value || '',
+      email: document.getElementById('applyEmail')?.value || '',
+      telefono: document.getElementById('applyPhone')?.value || '',
+      vacante: document.getElementById('applyJob')?.value || '',
+      mensaje: document.getElementById('applyMessage')?.value || '',
+      fecha: new Date().toISOString()
+    };
+    const stored = JSON.parse(localStorage.getItem('proespia_postulaciones') || '[]');
+    stored.push(data);
+    localStorage.setItem('proespia_postulaciones', JSON.stringify(stored));
+
+    setTimeout(() => { btn.innerHTML = orig; btn.style.pointerEvents = ''; }, 4000);
+  });
+</script>

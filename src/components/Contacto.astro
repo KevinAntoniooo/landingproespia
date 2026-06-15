@@ -1,0 +1,144 @@
+---
+// Contacto.astro — Sección de contacto con formulario y datos tácticos
+---
+
+<section class="relative bg-[#05070F] py-20 md:py-28 overflow-hidden" id="contacto">
+  <!-- Grid overlay -->
+  <div class="absolute inset-0 pointer-events-none" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.01) 2px, rgba(0,255,0,0.01) 4px);"></div>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-14 space-y-3">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono font-bold uppercase">Contacto</span>
+      <h2 class="text-[clamp(1.7rem,3vw,2.3rem)] font-black text-white leading-tight">Hablemos de tu <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">seguridad</span></h2>
+      <p class="text-gray-400 text-base max-w-2xl mx-auto">Déjanos tus datos y un experto en protección electrónica te contactará en menos de 24 horas para evaluar tu propiedad sin compromiso.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-stretch">
+      <!-- Form -->
+      <div class="bg-[#0A0D1A] border border-white/5 rounded-2xl p-7 md:p-9 flex flex-col shadow-[0_0_15px_rgba(239,68,68,0.07)]">
+        <form class="flex flex-col gap-4 flex-1" id="contactForm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[0.8rem] font-semibold text-gray-400 mb-1">Nombre completo</label>
+              <input type="text" class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all shadow-[0_0_15px_rgba(0,240,255,0.03)]" placeholder="Ej: Juan Pérez" required />
+            </div>
+            <div>
+              <label class="block text-[0.8rem] font-semibold text-gray-400 mb-1">Teléfono</label>
+              <input type="tel" class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all shadow-[0_0_15px_rgba(0,240,255,0.03)]" placeholder="+56 9 1234 5678" required />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[0.8rem] font-semibold text-gray-400 mb-1">Correo electrónico</label>
+              <input type="email" class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all shadow-[0_0_15px_rgba(0,240,255,0.03)]" placeholder="correo@ejemplo.cl" />
+            </div>
+            <div>
+              <label class="block text-[0.8rem] font-semibold text-gray-400 mb-1">Tipo de propiedad</label>
+              <select class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all shadow-[0_0_15px_rgba(0,240,255,0.03)]">
+                <option value="" disabled selected class="bg-[#05070F]">Selecciona</option>
+                <option value="casa" class="bg-[#05070F]">Casa</option>
+                <option value="local" class="bg-[#05070F]">Local Comercial</option>
+                <option value="bodega" class="bg-[#05070F]">Bodega / Galpón</option>
+                <option value="industria" class="bg-[#05070F]">Industria</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[0.8rem] font-semibold text-gray-400 mb-1">Mensaje</label>
+            <textarea class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all min-h-[100px] shadow-[0_0_15px_rgba(0,240,255,0.03)]" placeholder="Cuéntanos sobre tu proyecto o necesidades de seguridad..."></textarea>
+          </div>
+          <button type="submit" class="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white font-black uppercase tracking-wider py-4 rounded-lg shadow-[0_0_15px_rgba(239,68,68,0.15)] transition-all mt-auto">
+            <i class="fa-solid fa-paper-plane mr-2"></i>
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col gap-4">
+        <div class="bg-[#0A0D1A] border border-white/5 border-l-4 border-l-red-500 rounded-xl p-6 shadow-[0_0_15px_rgba(239,68,68,0.07)]">
+          <div class="flex items-center gap-3 mb-3">
+            <i class="fa-solid fa-headset text-red-400 text-xl"></i>
+            <h3 class="text-base font-bold text-white">Central de monitoreo 24/7</h3>
+          </div>
+          <p class="text-sm text-gray-400 leading-relaxed">Atención inmediata los 365 días del año. Si eres cliente, contáctanos directo a nuestra central.</p>
+        </div>
+
+        <div class="flex flex-col gap-2.5 flex-1">
+          <a href="https://wa.me/56722266383" target="_blank" rel="noopener" class="flex items-center gap-3 p-4 bg-[#0A0D1A] border border-white/5 rounded-lg hover:border-green-500/30 hover:bg-[#0D1120] transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.02)]">
+            <div class="w-[42px] h-[42px] rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-whatsapp text-green-400 text-lg"></i>
+            </div>
+            <div>
+              <strong class="block text-sm font-bold text-white">WhatsApp</strong>
+              <span class="block text-xs text-gray-400 mt-0.5">+56 722 266 383</span>
+            </div>
+          </a>
+          <a href="tel:+56722266383" class="flex items-center gap-3 p-4 bg-[#0A0D1A] border border-white/5 rounded-lg hover:border-red-500/20 hover:bg-[#0D1120] transition-all duration-300">
+            <div class="w-[42px] h-[42px] rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-phone text-red-400 text-lg"></i>
+            </div>
+            <div>
+              <strong class="block text-sm font-bold text-white">Llámanos</strong>
+              <span class="block text-xs text-gray-400 mt-0.5">+56 722 266 383</span>
+            </div>
+          </a>
+          <a href="mailto:proyectos@proespia.cl" class="flex items-center gap-3 p-4 bg-[#0A0D1A] border border-white/5 rounded-lg hover:border-blue-500/20 hover:bg-[#0D1120] transition-all duration-300">
+            <div class="w-[42px] h-[42px] rounded-xl bg-blue-500/10 border border-blue-500/15 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-envelope text-blue-400 text-lg"></i>
+            </div>
+            <div>
+              <strong class="block text-sm font-bold text-white">Correo</strong>
+              <span class="block text-xs text-gray-400 mt-0.5">proyectos@proespia.cl</span>
+            </div>
+          </a>
+          <div class="flex items-center gap-3 p-4 bg-[#0A0D1A] border border-white/5 rounded-lg">
+            <div class="w-[42px] h-[42px] rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-location-dot text-red-400 text-lg"></i>
+            </div>
+            <div>
+              <strong class="block text-sm font-bold text-white">Dirección</strong>
+              <span class="block text-xs text-gray-400 mt-0.5">01001 Uruguay, Rancagua, Chile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    const fields = contactForm.querySelectorAll('input, select, textarea');
+    fields.forEach(f => {
+      f.addEventListener('invalid', () => f.classList.add('ring-2', 'ring-red-500/40'));
+      f.addEventListener('blur', () => {
+        if (f.hasAttribute('required') && !f.value.trim()) {
+          f.classList.add('ring-2', 'ring-red-500/40');
+        } else {
+          f.classList.remove('ring-2', 'ring-red-500/40');
+        }
+      });
+    });
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+      fields.forEach(f => {
+        if (f.hasAttribute('required') && !f.value.trim()) {
+          f.classList.add('ring-2', 'ring-red-500/40');
+          valid = false;
+        } else {
+          f.classList.remove('ring-2', 'ring-red-500/40');
+        }
+      });
+      if (!valid) return;
+      const btn = e.target.querySelector('button[type="submit"]');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Mensaje enviado con éxito';
+      btn.style.pointerEvents = 'none';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.pointerEvents = ''; }, 4000);
+    });
+  }
+</script>

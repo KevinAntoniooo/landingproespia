@@ -1,0 +1,229 @@
+---
+// ProcesoSection.astro — Cómo operamos, proceso de respuesta
+---
+
+<section class="proceso section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Protocolo</span>
+      <h2>Así <span>operamos</span> ante una alerta</h2>
+      <p>Protocolo de seguridad certificado OS-10 con respuesta inmediata y coordinación con Carabineros de Chile</p>
+    </div>
+
+    <div class="proceso__grid">
+      <div class="proceso-step">
+        <div class="proceso-step__num">01</div>
+        <div class="proceso-step__icon">
+          <i class="fa-solid fa-eye"></i>
+        </div>
+        <h3>Detección Inteligente</h3>
+        <p>Sensores perimetrales y cámaras con IA identifican la amenaza en tiempo real. Distinguimos entre personas, vehículos y animales para eliminar falsas alarmas.</p>
+      </div>
+
+      <div class="proceso-step">
+        <div class="proceso-step__num">02</div>
+        <div class="proceso-step__icon">
+          <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+        <h3>Voceo Disuasivo</h3>
+        <p>Nuestro operador se comunica por altavoz bidireccional, identificándose y advirtiendo al intruso que está siendo grabado y monitoreado por la central.</p>
+      </div>
+
+      <div class="proceso-step">
+        <div class="proceso-step__num">03</div>
+        <div class="proceso-step__icon">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <h3>Sirena + Baliza</h3>
+        <p>Activación automática de sirena de 120dB y baliza LED estroboscópica para exponer y desorientar al intruso, alertando a vecinos y transeúntes.</p>
+      </div>
+
+      <div class="proceso-step">
+        <div class="proceso-step__num">04</div>
+        <div class="proceso-step__icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3>Conexión Alpha III</h3>
+        <p>Verificación y enlace directo con Carabineros de Chile mediante plataforma Alpha III. Coordinación inmediata con la unidad policial más cercana.</p>
+      </div>
+
+      <div class="proceso-step">
+        <div class="proceso-step__num">05</div>
+        <div class="proceso-step__icon">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <h3>Notificación al Cliente</h3>
+        <p>Recibirás alerta en tu móvil con imágenes del evento, resumen de acciones tomadas y seguimiento en tiempo real vía nuestra app o WhatsApp.</p>
+      </div>
+
+      <div class="proceso-step">
+        <div class="proceso-step__num">06</div>
+        <div class="proceso-step__icon">
+          <i class="fa-solid fa-wrench"></i>
+        </div>
+        <h3>Despacho Técnico</h3>
+        <p>Si se requiere, despachamos al técnico más cercano vía GPS para verificación en terreno, restablecimiento de equipos y peritaje post-evento.</p>
+      </div>
+    </div>
+
+    <div class="proceso__cta">
+      <a href="/#contacto" class="btn btn--primary btn--lg">
+        <i class="fa-solid fa-shield-halved"></i>
+        Contrata tu protección ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proceso {
+    background: var(--bg-section);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proceso-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: var(--transition);
+    overflow: hidden;
+  }
+
+  .proceso-step:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .proceso-step h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .proceso-step p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .proceso::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(30, 64, 175, 0.08), transparent);
+    pointer-events: none;
+  }
+
+  .proceso__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .proceso-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: var(--transition);
+    overflow: hidden;
+  }
+
+  .proceso-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--blue-800), var(--blue-700));
+    transition: var(--transition);
+  }
+
+  .proceso-step:hover::before { height: 100%; }
+
+  .proceso-step:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .proceso-step__num {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: rgba(30, 64, 175, 0.06);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+  }
+
+  .proceso-step h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .proceso-step p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .proceso-step__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 64, 175, 0.08);
+    border: 1px solid rgba(30, 64, 175, 0.1);
+    margin-bottom: 1rem;
+  }
+
+  .proceso-step__icon i {
+    font-size: 1.3rem;
+    color: var(--blue-800);
+  }
+
+  .proceso-step h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .proceso-step p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .proceso__cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 968px) {
+    .proceso__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .proceso__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

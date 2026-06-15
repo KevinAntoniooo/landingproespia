@@ -1,0 +1,105 @@
+---
+// CentralMonitoreo.astro — Infraestructura, stats, tecnología
+---
+
+<section class="relative bg-[#080C16] py-20 md:py-28 border-y border-white/5 overflow-hidden" id="central">
+  <!-- Scan lines -->
+  <div class="absolute inset-0 pointer-events-none" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,255,0,0.008) 3px, rgba(0,255,0,0.008) 5px);"></div>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <!-- Left: info & stats -->
+    <div class="space-y-6">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono font-bold uppercase">Infraestructura</span>
+      <h2 class="text-[clamp(1.7rem,3vw,2.3rem)] font-black text-white leading-tight">
+        Central Inteligente en la <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">Región de O'Higgins</span>
+      </h2>
+      <p class="text-gray-400 text-base leading-relaxed max-w-[540px]">
+        Operamos la central de monitoreo más avanzada de Rancagua y la Región de O'Higgins. Conectamos tu propiedad a una red técnica de respuesta con protocolos certificados OS-10 por Carabineros de Chile.
+      </p>
+      <div class="grid grid-cols-2 gap-3.5">
+        <div class="bg-[#0A0D1A] border border-white/5 border-l-4 border-l-red-500 rounded-lg p-4 relative overflow-hidden">
+          <span class="block text-2xl font-extrabold text-red-500 leading-none">+7.000</span>
+          <span class="block text-xs text-gray-400 mt-1 font-medium">Propiedades protegidas</span>
+        </div>
+        <div class="bg-[#0A0D1A] border border-white/5 border-l-4 border-l-red-500 rounded-lg p-4 relative overflow-hidden">
+          <span class="block text-2xl font-extrabold text-red-500 leading-none">&lt; 30s</span>
+          <span class="block text-xs text-gray-400 mt-1 font-medium">Tiempo de alerta</span>
+        </div>
+        <div class="bg-[#0A0D1A] border border-white/5 border-l-4 border-l-red-500 rounded-lg p-4 relative overflow-hidden">
+          <span class="block text-2xl font-extrabold text-red-500 leading-none">24/7</span>
+          <span class="block text-xs text-gray-400 mt-1 font-medium">Operación continua</span>
+        </div>
+        <div class="bg-[#0A0D1A] border border-white/5 border-l-4 border-l-red-500 rounded-lg p-4 relative overflow-hidden">
+          <span class="block text-2xl font-extrabold text-red-500 leading-none">+50</span>
+          <span class="block text-xs text-gray-400 mt-1 font-medium">Técnicos certificados</span>
+        </div>
+        </div>
+
+      <!-- Marquee operaciones en vivo -->
+      <div class="overflow-hidden w-full border-y border-white/5 bg-[#0C0F1D] -mx-6 px-6 lg:-mx-8 lg:px-8">
+        <div class="font-mono text-xs text-slate-400 uppercase tracking-widest py-2 whitespace-nowrap animate-marquee">
+          ● SISTEMA ACTIVO EN COMUNIDAD MACHALÍ [OK] &mdash; ● MONITOREO INDUSTRIAL ACTIVADO EN RUTA 5 SUR [LIVE] &mdash; ● NUEVA CENTRAL DE CONSERJERÍA EN EDIFICIO RANCAGUA CENTRO [CONECTADO] &mdash; ● ALERTA PERIMETRAL DESPACHADA EN SAN FERNANDO [FRUSTRADO] &nbsp;
+          ● SISTEMA ACTIVO EN COMUNIDAD MACHALÍ [OK] &mdash; ● MONITOREO INDUSTRIAL ACTIVADO EN RUTA 5 SUR [LIVE] &mdash; ● NUEVA CENTRAL DE CONSERJERÍA EN EDIFICIO RANCAGUA CENTRO [CONECTADO] &mdash; ● ALERTA PERIMETRAL DESPACHADA EN SAN FERNANDO [FRUSTRADO]
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: features -->
+    <div class="flex flex-col gap-3.5">
+      <div class="flex items-start gap-4 p-5 bg-[#0A0D1A] border border-white/5 rounded-xl hover:bg-[#0D1120] hover:border-red-500/15 transition-all duration-300">
+        <div class="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-truck-fast text-red-400 text-xl"></i>
+        </div>
+        <div>
+          <h4 class="text-[0.95rem] font-bold text-white mb-1.5">Control de Flotas GPS</h4>
+          <p class="text-sm text-gray-400 leading-relaxed">Seguimiento satelital en tiempo real de nuestra flota técnica. Despacho inteligente del móvil más cercano a tu propiedad ante cualquier alerta crítica.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-5 bg-[#0A0D1A] border border-white/5 rounded-xl hover:bg-[#0D1120] hover:border-red-500/15 transition-all duration-300">
+        <div class="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-bolt text-red-400 text-xl"></i>
+        </div>
+        <div>
+          <h4 class="text-[0.95rem] font-bold text-white mb-1.5">Velocidad de Respuesta</h4>
+          <p class="text-sm text-gray-400 leading-relaxed">Protocolos automatizados que reducen los tiempos de reacción. Desde que se activa una alerta hasta la verificación técnica en terreno en menos de 30 segundos.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-5 bg-[#0A0D1A] border border-white/5 rounded-xl hover:bg-[#0D1120] hover:border-red-500/15 transition-all duration-300">
+        <div class="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-microchip text-red-400 text-xl"></i>
+        </div>
+        <div>
+          <h4 class="text-[0.95rem] font-bold text-white mb-1.5">Tecnología de Punta</h4>
+          <p class="text-sm text-gray-400 leading-relaxed">Plataforma de videovigilancia en la nube con análisis de video inteligente, sensores multifunción, backup de energía e internet satelital y panel de control desde tu móvil.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-5 bg-[#0A0D1A] border border-white/5 rounded-xl hover:bg-[#0D1120] hover:border-red-500/15 transition-all duration-300">
+        <div class="w-11 h-11 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-shield-halved text-red-400 text-xl"></i>
+        </div>
+        <div>
+          <h4 class="text-[0.95rem] font-bold text-white mb-1.5">Conexión Alpha III</h4>
+          <p class="text-sm text-gray-400 leading-relaxed">Enlace directo certificado con la plataforma Alpha III de Carabineros de Chile para una coordinación inmediata ante emergencias verificadas.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>

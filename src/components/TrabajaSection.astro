@@ -1,0 +1,152 @@
+---
+// TrabajaSection.astro — Sección en la landing que enlaza a la página de carreras
+---
+
+<section class="trabaja-section section section--compact-top">
+  <div class="container">
+    <div class="trabaja-section__card">
+      <div class="trabaja-section__content">
+        <span class="section-tag reveal">Talento</span>
+        <h2 class="reveal reveal-delay-1">¿Quieres ser parte de <span>Pro Espía</span>?</h2>
+        <p class="reveal reveal-delay-2">Buscamos profesionales comprometidos con la seguridad. Únete al equipo líder en monitoreo 24/7 de la Región de O'Higgins y construye tu carrera con nosotros.</p>
+        <div class="trabaja-section__benefits">
+          <div class="trabaja-benefit">
+            <i class="fa-solid fa-briefcase"></i>
+            <span>Contrato formal desde el día 1</span>
+          </div>
+          <div class="trabaja-benefit">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Capacitación continua certificada</span>
+          </div>
+          <div class="trabaja-benefit">
+            <i class="fa-solid fa-users"></i>
+            <span>Ambiente laboral estable y seguro</span>
+          </div>
+          <div class="trabaja-benefit">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Trabajo en Rancagua y región</span>
+          </div>
+        </div>
+        <a href="/trabaja-con-nosotros" class="btn btn--primary btn--lg">
+          <i class="fa-solid fa-paper-plane"></i>
+          Ver trabajos disponibles
+        </a>
+      </div>
+      <div class="trabaja-section__visual img-placeholder has-img">
+        <div class="img-content">
+          <i class="fa-solid fa-users"></i>
+          <span>Equipo Pro Espía</span>
+        </div>
+        <img src="/assets/unnamed.webp" alt="Equipo Pro Espía" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trabaja-section {
+    background: var(--bg-section);
+  }
+
+  .trabaja-section__card {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.5rem;
+    align-items: center;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+  }
+
+  .trabaja-section__content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .trabaja-benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .trabaja-section__card {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.5rem;
+    align-items: center;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+  }
+
+  .trabaja-section__content h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+
+  .trabaja-section__content h2 span {
+    background: linear-gradient(135deg, var(--blue-800), var(--blue-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .trabaja-section__content p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .trabaja-section__benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .trabaja-benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .trabaja-benefit i {
+    color: var(--blue-800);
+    font-size: 0.9rem;
+  }
+
+  .trabaja-section__visual {
+    min-height: 280px;
+    border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 868px) {
+    .trabaja-section__card {
+      grid-template-columns: 1fr;
+    }
+
+    .trabaja-section__visual {
+      min-height: 200px;
+      order: -1;
+    }
+
+    .trabaja-section__benefits {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

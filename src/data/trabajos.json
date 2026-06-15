@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "titulo": "Técnico en Seguridad Electrónica",
+    "ubicacion": "Rancagua, Región de O'Higgins",
+    "tipo": "Tiempo Completo",
+    "modalidad": "Presencial",
+    "fecha": "2026-05-15",
+    "activo": true,
+    "resumen": "Buscamos técnico especializado en instalación y mantención de sistemas de alarma, CCTV y control de acceso.",
+    "requisitos": [
+      "Experiencia mínima de 2 años en seguridad electrónica",
+      "Conocimiento en sistemas de alarma, CCTV y alarmas perimetrales",
+      "Licencia de conducir clase B",
+      "Disponibilidad para trabajo en terreno en Rancagua y región",
+      "Enseñanza media completa"
+    ],
+    "ofrecemos": [
+      "Sueldo competitivo + bonos por desempeño",
+      "Capacitación continua en nuevas tecnologías",
+      "Vehículo corporativo para labores en terreno",
+      "Contrato indefinido desde el día 1"
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Operador de Central de Monitoreo",
+    "ubicacion": "Rancagua, Región de O'Higgins",
+    "tipo": "Turnos Rotativos",
+    "modalidad": "Presencial",
+    "fecha": "2026-05-20",
+    "activo": true,
+    "resumen": "Operador/a para central de monitoreo 24/7. Supervisión de alarmas, cámaras y coordinación de despacho técnico.",
+    "requisitos": [
+      "Experiencia en centrales de monitoreo o afines",
+      "Manejo de software de monitoreo y CCTV",
+      "Disponibilidad para trabajar en turnos (día, noche y fines de semana)",
+      "Capacidad de reacción ante emergencias",
+      "Enseñanza media completa"
+    ],
+    "ofrecemos": [
+      "Remuneración acorde al cargo",
+      "Seguro de vida",
+      "Capacitación en plataforma de monitoreo",
+      "Ambiente laboral estable"
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Ejecutivo Comercial Senior",
+    "ubicacion": "Rancagua, Región de O'Higgins",
+    "tipo": "Tiempo Completo",
+    "modalidad": "Presencial / Terreno",
+    "fecha": "2026-05-10",
+    "activo": true,
+    "resumen": "Ejecutivo/a comercial para captación de clientes corporativos y residenciales en la Región de O'Higgins.",
+    "requisitos": [
+      "Experiencia mínima de 3 años en ventas B2B",
+      "Cartera de contactos en la región (deseable)",
+      "Orientación a resultados y metas",
+      "Licencia de conducir clase B",
+      "Estudios superiores en administración, ingeniería comercial o afines"
+    ],
+    "ofrecemos": [
+      "Sueldo base + comisiones sin tope",
+      "Bono por meta trimestral",
+      "Vehículo corporativo",
+      "Capacitación en producto y técnicas de venta"
+    ]
+  }
+]

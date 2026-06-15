@@ -1,0 +1,245 @@
+---
+// Testimonios.astro — Slider infinito automático con control JS
+const testimonios = [
+  {
+    stars: 5,
+    quote: "Desde que instalamos Pro Espía en nuestra ferretería, los intentos de robo se redujeron a cero. La respuesta de su central es inmediata, y el voceo disuade al instante. Servicio de primer nivel.",
+    name: "Carlos Muñoz",
+    role: "Ferretería El Constructor, Rancagua",
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    stars: 5,
+    quote: "Tranquilidad absoluta. Saber que mi casa está monitoreada 24/7 con técnicos que responden al instante me permite viajar sin preocupaciones. La app es súper fácil de usar.",
+    name: "María José Silva",
+    role: "Residencial, Sector Monserrat",
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    stars: 5,
+    quote: "Contratamos el monitoreo para nuestra bodega industrial. La instalación fue rápida y el equipo técnico siempre está disponible. Hemos recomendado Pro Espía a otros colegas del rubro.",
+    name: "Ricardo Ávila",
+    role: "Bodegas Ávila Hermanos, Requínoa",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    stars: 5,
+    quote: "Excelente servicio, instalaron cámaras en toda nuestra oficina y el monitoreo remoto nos da mucha seguridad. Muy recomendados a todo el gremio.",
+    name: "Ana Martínez",
+    role: "Ofibodega El Sol, Rancagua",
+    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face",
+  },
+];
+
+const visible = 3;
+const trackItems = [...testimonios, ...testimonios.slice(0, visible)];
+---
+
+<section class="testimonios section" id="testimonios">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Testimonios</span>
+      <h2>Lo que dicen nuestros <span>clientes</span></h2>
+      <p>Empresas, comercios y hogares en Rancagua y la Región de O'Higgins confían en Pro Espía para su seguridad</p>
+    </div>
+
+    <div class="testimonios__slider reveal">
+      <div class="testimonios__track" id="testimoniosTrack" data-count={testimonios.length}>
+        {trackItems.map((t) => (
+          <article class="testimonio-card">
+            <div class="testimonio-card__stars">
+              {Array.from({ length: t.stars }, () => (
+                <i class="fa-solid fa-star"></i>
+              ))}
+            </div>
+            <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
+            <div class="testimonio-card__author">
+              <div class="testimonio-card__avatar img-placeholder has-img">
+                <div class="img-content">
+                  <i class="fa-solid fa-user"></i>
+                  <span>Foto</span>
+                </div>
+                <img src={t.img} alt={t.name} loading="lazy" />
+              </div>
+              <div>
+                <strong>{t.name}</strong>
+                <span>{t.role}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="testimonios__cta reveal">
+      <a href="/#contacto" class="btn btn--primary btn--lg">
+        <i class="fa-solid fa-comment-dots"></i>
+        Únete a nuestros clientes satisfechos
+      </a>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .testimonios {
+    position: relative;
+  }
+
+  .testimonios__slider {
+    overflow: hidden;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .testimonios__track {
+    display: flex;
+    gap: 1.5rem;
+    will-change: transform;
+  }
+
+  .testimonio-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 0 0 calc((100% - 3rem) / 3);
+    box-sizing: border-box;
+  }
+
+  .testimonio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .testimonio-card__stars {
+    display: flex;
+    gap: 0.2rem;
+    color: var(--blue-500);
+    font-size: 0.95rem;
+  }
+
+  .testimonio-card blockquote {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    font-style: italic;
+    flex-grow: 1;
+  }
+
+  .testimonio-card__author {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .testimonio-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    min-height: 0;
+    flex-shrink: 0;
+  }
+
+  .testimonio-card__avatar img {
+    border-radius: 999px;
+  }
+
+  .testimonio-card__author strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .testimonio-card__author span {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .testimonios__cta {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 868px) {
+    .testimonios__track {
+      gap: 0;
+    }
+
+    .testimonio-card {
+      flex: 0 0 100%;
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .testimonio-card {
+      padding: 1.5rem 1.2rem;
+    }
+  }
+</style>
+
+<script>
+if (typeof window !== 'undefined') {
+(function() {
+  function init() {
+    var track = document.getElementById('testimoniosTrack');
+    if (!track) return;
+    var total = parseInt(track.getAttribute('data-count'), 10) || 4;
+    var visible = 3;
+    var current = 0;
+    var moving = false;
+
+    function isMobile() {
+      return window.innerWidth <= 868;
+    }
+
+    function slideTo(index, animated) {
+      track.style.transition = animated ? 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
+      if (isMobile()) {
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      } else {
+        track.style.transform = 'translateX(calc((-100% - 1.5rem) / ' + visible + ' * ' + index + '))';
+      }
+    }
+
+    function next() {
+      if (moving) return;
+      moving = true;
+      current++;
+      if (current >= total) {
+        slideTo(current, true);
+        setTimeout(function() {
+          current = 0;
+          slideTo(0, false);
+          moving = false;
+        }, 500);
+      } else {
+        slideTo(current, true);
+        setTimeout(function() {
+          moving = false;
+        }, 500);
+      }
+    }
+
+    slideTo(0, false);
+    setInterval(next, 5000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+}
+</script>
