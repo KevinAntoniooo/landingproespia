@@ -2,7 +2,7 @@
 // Hero.astro — Sección principal de conversión con formulario
 ---
 
-<section class="relative min-h-screen flex items-center overflow-hidden bg-[#05070F] py-24 md:py-32" id="hero">
+<section class="relative min-h-screen flex items-center overflow-hidden bg-hero-bg py-24 md:py-32" id="hero" role="region" aria-label="Hero principal con formulario de cotización">
 
   <!-- Laser scan line -->
   <div class="absolute left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent animate-pulse pointer-events-none z-[5]" style="top:45%"></div>
@@ -11,8 +11,7 @@
   <div class="absolute inset-0 z-0">
     <div class="absolute inset-0 bg-[url('/assets/Home_Cotiza_Imagen-2-2.jpg')] bg-center bg-cover bg-no-repeat saturate-[0.6] brightness-[0.25]"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-[#05070F]/90 via-[#05070F]/60 to-[#05070F]/30"></div>
-    <div class="absolute inset-0" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.015) 2px, rgba(0,255,0,0.015) 4px);"></div>
-    <div class="absolute inset-0" style="background-image: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,255,0,0.01) 3px, rgba(0,255,0,0.01) 5px);"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h32v1H0zm0 16h32v1H0zm0 8h32v1H0zm0 24h32v1H0z' fill='%2300ff00'/%3E%3C/svg%3E&quot;); background-repeat: repeat;"></div>
   </div>
 
   <!-- Content grid -->
@@ -26,7 +25,7 @@
       </span>
 
       <h1 class="text-[clamp(2rem,4.2vw,3.2rem)] font-black leading-[1.1] tracking-tight text-white">
-        Protegemos tu hogar o empresa en <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">Rancagua</span> con <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">tecnología de punta</span>
+        Protegemos tu hogar o empresa en <span class="text-blue-400">Rancagua</span> con <span class="text-blue-400">tecnología de punta</span>
       </h1>
 
       <p class="text-base md:text-lg text-gray-400 leading-relaxed max-w-[540px]">
@@ -51,7 +50,7 @@
 
     <!-- Form card -->
     <div class="flex justify-end">
-      <div class="w-full max-w-[440px] bg-[#0A0D1A]/95 backdrop-blur border border-red-500/20 rounded-2xl p-7 md:p-9 shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
+      <div class="w-full max-w-[440px] bg-card-bg/95 backdrop-blur border border-red-500/20 rounded-2xl p-7 md:p-9 shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
         <div class="text-center mb-6">
           <i class="fa-solid fa-shield-halved text-3xl text-red-500 mb-3"></i>
           <h3 class="text-lg font-bold text-white">EVALUAR MI BRECHA DE SEGURIDAD GRATIS — RESPUESTA EN 15 MINUTOS</h3>
@@ -61,20 +60,20 @@
         <form class="flex flex-col gap-3.5" id="heroForm">
           <div>
             <label for="heroName" class="block text-[0.7rem] font-semibold text-gray-400 uppercase tracking-[0.3px] mb-1 font-mono">Nombre completo</label>
-            <input type="text" id="heroName" class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all" placeholder="Ej: Juan Pérez" required />
+            <input type="text" id="heroName" class="w-full bg-hero-bg border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all" placeholder="Ej: Juan Pérez" required />
           </div>
           <div>
             <label for="heroPhone" class="block text-[0.7rem] font-semibold text-gray-400 uppercase tracking-[0.3px] mb-1 font-mono">Teléfono</label>
-            <input type="tel" id="heroPhone" class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all" placeholder="+56 9 1234 5678" required />
+            <input type="tel" id="heroPhone" class="w-full bg-hero-bg border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm placeholder-slate-400 focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all" placeholder="+56 9 1234 5678" required />
           </div>
           <div>
             <label for="heroProperty" class="block text-[0.7rem] font-semibold text-gray-400 uppercase tracking-[0.3px] mb-1 font-mono">Tipo de Propiedad</label>
-            <select id="heroProperty" class="w-full bg-[#05070F] border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all" required>
-              <option value="" disabled selected class="bg-[#05070F] text-slate-400">Selecciona una opción</option>
-              <option value="casa" class="bg-[#05070F]">Casa</option>
-              <option value="local" class="bg-[#05070F]">Local Comercial</option>
-              <option value="bodega" class="bg-[#05070F]">Bodega / Galpón</option>
-              <option value="industria" class="bg-[#05070F]">Industria</option>
+            <select id="heroProperty" class="w-full bg-hero-bg border border-white/10 rounded-lg px-4 py-3.5 text-white font-mono text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500/30 transition-all" required>
+              <option value="" disabled selected class="bg-hero-bg text-slate-400">Selecciona una opción</option>
+              <option value="casa" class="bg-hero-bg">Casa</option>
+              <option value="local" class="bg-hero-bg">Local Comercial</option>
+              <option value="bodega" class="bg-hero-bg">Bodega / Galpón</option>
+              <option value="industria" class="bg-hero-bg">Industria</option>
             </select>
           </div>
           <button type="submit" class="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white font-black uppercase tracking-wider py-4 rounded-lg shadow-xl shadow-red-600/20 transition-all mt-1">

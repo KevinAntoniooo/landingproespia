@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-14T00:00:00.000Z",
+  "title": "Design System: Pro Espía",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Signal Blue", "canonical": "oklch(47% 0.17 270)" },
+      "primary-light": { "role": "primary", "displayName": "Signal Blue Light", "canonical": "oklch(62% 0.16 250)" },
+      "primary-dark": { "role": "neutral", "displayName": "Radar Navy Deep", "canonical": "oklch(14% 0.04 270)" },
+      "accent": { "role": "accent", "displayName": "Alert Red", "canonical": "oklch(57% 0.23 25)" },
+      "success": { "role": "accent", "displayName": "Terminal Green", "canonical": "oklch(62% 0.19 145)" },
+      "neutral-bg": { "role": "neutral", "displayName": "Radar Navy", "canonical": "oklch(6% 0.04 270)" },
+      "neutral-surface": { "role": "neutral", "displayName": "Radar Navy Deep", "canonical": "oklch(14% 0.04 270)" },
+      "neutral-text": { "role": "neutral", "displayName": "Screen Text", "canonical": "oklch(94% 0.01 260)" },
+      "neutral-text-secondary": { "role": "neutral", "displayName": "Data Text", "canonical": "oklch(72% 0.04 250)" },
+      "neutral-text-muted": { "role": "neutral", "displayName": "Dim Text", "canonical": "oklch(63% 0.05 260)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero H1 only. Never used outside the top section." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings, once per section." },
+      "body": { "displayName": "Body", "purpose": "Prose, descriptions. Cap at 65ch." },
+      "label": { "displayName": "Label", "purpose": "Form labels, telemetry, uppercase. JetBrains Mono only." }
+    },
+    "shadows": [
+      { "name": "panel", "value": "0 8px 32px rgba(0,0,0,0.25)", "purpose": "Default shadow for all cards and containers at rest." },
+      { "name": "modal", "value": "0 20px 60px rgba(0,0,0,0.35)", "purpose": "Elevated z-depth for overlays and dialogs." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing for state transitions." },
+      { "name": "ease-expressive", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Easing for reveals and entrances." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "968px" },
+      { "name": "xl", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-contrast CTA for urgency and conversion.",
+      "html": "<button class=\"ds-btn-primary\">COTIZAR GRATIS</button>",
+      "css": ".ds-btn-primary { background: #ef4444; color: #fff; font-family: Inter, system-ui, sans-serif; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 16px 32px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease; } .ds-btn-primary:hover { background: #dc2626; } .ds-btn-primary:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Low-emphasis action for secondary paths.",
+      "html": "<button class=\"ds-btn-ghost\">Ver más</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #3b82f6; font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 0.88rem; padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.04); color: #fff; } .ds-btn-ghost:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Dark input field for forms and data entry.",
+      "html": "<div><label class=\"ds-label\">NOMBRE COMPLETO</label><input class=\"ds-input\" type=\"text\" placeholder=\"Ej: Juan Pérez\"></div>",
+      "css": ".ds-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #a8bcd0; margin-bottom: 4px; } .ds-input { width: 100%; background: #080c18; color: #f1f5f9; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; } .ds-input:focus { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.15); } .ds-input::placeholder { color: #8596ab; }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Default container panel for sections and features.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Monitoreo 24 Horas</h3><p class=\"ds-card-body\">Central inteligente operativa los 365 días del año.</p></div>",
+      "css": ".ds-card { background: #0e182e; border: 1px solid rgba(255,255,255,0.06); border-radius: 28px; padding: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.25); transition: border-color 0.3s ease; } .ds-card:hover { border-color: rgba(30,64,175,0.15); } .ds-card-title { font-family: Inter, system-ui, sans-serif; font-size: 1.15rem; font-weight: 800; color: #f1f5f9; margin: 0 0 8px; } .ds-card-body { font-family: Inter, system-ui, sans-serif; font-size: 0.88rem; color: #a8bcd0; line-height: 1.65; margin: 0; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Fixed top navigation with glass effect.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Servicios</a><a class=\"ds-nav-link\" href=\"#\">Central</a><a class=\"ds-nav-link\" href=\"#\">Clientes</a><button class=\"ds-nav-cta\">Cotizar Gratis</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 0.25rem; padding: 0 24px; height: 72px; background: rgba(8,12,24,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.04); } .ds-nav-link { font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 0.88rem; color: rgba(255,255,255,0.75); text-decoration: none; padding: 8px 14px; border-radius: 8px; transition: color 0.2s ease, background 0.2s ease; } .ds-nav-link:hover { color: #3b82f6; background: rgba(255,255,255,0.04); } .ds-nav-cta { margin-left: auto; background: #ef4444; color: #fff; font-family: Inter, system-ui, sans-serif; font-weight: 700; font-size: 0.82rem; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease; } .ds-nav-cta:hover { background: #dc2626; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Live-status badge for disuasión results and operational state.",
+      "html": "<span class=\"ds-chip-success\">Disuasión exitosa</span>",
+      "css": ".ds-chip-success { display: inline-flex; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); border-radius: 999px; padding: 2px 10px; letter-spacing: 0.05em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Surveillance Grid",
+    "overview": "A command-center aesthetic crossed with corporate elegance. The interface reads as an active monitoring dashboard — precise, always-scanning, technically sophisticated — but never aggressive or alarming. This is the control room of a premium security operation: dark surfaces, crisp typography, measured use of red urgency signals, and ambient shadows that give each panel weight without noise. The system explicitly rejects paramilitary grit, cartoon security clichés, and any aesthetic that prioritizes 'cool tech' over professional credibility.",
+    "keyCharacteristics": [
+      "Radar-focus on legibility and contrast over decoration",
+      "Ambient shadowing for depth; no glassmorphism, no gradients as decoration",
+      "Monospace labels signal telemetry and technical precision",
+      "Red is reserved for active alerts, not decoration",
+      "The dark navy background is the command-center default, not a 'dark mode toggle'"
+    ],
+    "rules": [
+      { "name": "The Alert Red Rule", "body": "Red is never decorative. Every red element signals an active state, a CTA, or a live alert. If it's not one of those, use Signal Blue or neutral.", "section": "colors" },
+      { "name": "The Mono Label Rule", "body": "JetBrains Mono is reserved for labels, telemetry, and uppercase metadata. Never use it for body copy or headings. The switch to monospace is a deliberate signal: 'this is an instrument reading, not natural language.'", "section": "typography" },
+      { "name": "The Single-Shadow Rule", "body": "A surface gets exactly one shadow at rest. Hover states use border or background changes, not added shadow depth. Two shadows on one element is the tell of an over-engineered card.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the Radar Navy (#080c18) as the full-screen default. It's the command-center anchor; every other color sits on it.",
+      "Do use Signal Blue for all interactive and accent needs. It's the functional workhorse — hover states, section indicators, icon tints.",
+      "Do save Alert Red for CTAs, live-status badges, and real urgency signals. Its rarity is what gives it power.",
+      "Do switch to JetBrains Mono for any text that represents data, telemetry, or labels. The shift signals 'instrumentation.'",
+      "Do use ambient shadows on cards and panels at rest. This is a shadow-as-material system, not a shadow-on-hover system."
+    ],
+    "donts": [
+      "Don't use gradient text (background-clip + gradient). Use a single solid color for all typography.",
+      "Don't use side-stripe borders (border-left >= 2px as decorative accent). Use full borders, background tints, or nothing.",
+      "Don't use glassmorphism as default. Blur and transparency are reserved for the nav bar and modal overlays only.",
+      "Don't use the hero-metric template (big number + small label + supporting stats) as a reflexive pattern.",
+      "Don't use tiny uppercase tracked eyebrows above every section. One named kicker is voice; an eyebrow on every section is AI grammar.",
+      "Don't use radii >= 32px on cards, sections, or inputs. Cards top out at 28px.",
+      "Don't pair border: 1px with box-shadow blur >= 16px on the same element. Pick one.",
+      "Don't use paramilitary imagery, camouflage aesthetics, or 'war on crime' visual rhetoric."
+    ]
+  }
+}

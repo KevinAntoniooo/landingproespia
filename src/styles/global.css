@@ -102,8 +102,8 @@ button {
   --header-h: 72px;
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-lg: 16px;
+  --radius-xl: 16px;
   --shadow-card: 0 8px 32px rgba(0,0,0,0.25);
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.35);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -121,6 +121,14 @@ button {
   --input-bg: rgba(255,255,255,0.04);
   --placeholder-color: var(--text-dim);
   --hero-overlay: rgba(8, 12, 24, 0.85);
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 /* ----- SECTION TAG (global) ----- */
@@ -144,6 +152,15 @@ button {
   height: 2px;
   background: var(--blue-700);
   border-radius: 2px;
+}
+
+/* ----- REDUCED MOTION ----- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ----- ANIMATIONS ----- */
@@ -189,9 +206,21 @@ button {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(40px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .reveal.is-visible {
@@ -206,9 +235,21 @@ button {
 .reveal-delay-5 { transition-delay: 0.5s; }
 
 .reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
+  opacity: 1;
+  transform: translateX(0);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  .reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .reveal-left.is-visible {
@@ -217,9 +258,21 @@ button {
 }
 
 .reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
+  opacity: 1;
+  transform: translateX(0);
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  .reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .reveal-right.is-visible {
@@ -264,10 +317,7 @@ button {
 }
 
 .section-header h2 span {
-  background: linear-gradient(135deg, var(--blue-800), var(--blue-700));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--blue-800);
 }
 
 .section-header p {

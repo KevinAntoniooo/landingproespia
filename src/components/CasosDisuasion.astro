@@ -2,13 +2,12 @@
 // CasosDisuasion.astro — Galería de disuasiones con video real
 ---
 
-<section class="relative bg-[#05070F] py-20 md:py-28 overflow-hidden" id="casos">
-  <div class="absolute inset-0 pointer-events-none" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.012) 2px, rgba(0,255,0,0.012) 4px);"></div>
+<section class="relative bg-hero-bg py-20 md:py-28 overflow-hidden" id="casos" role="region" aria-label="Casos de disuasión">
+  <div class="absolute inset-0 pointer-events-none opacity-[0.025]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h32v1H0zm0 16h32v1H0z' fill='%2300ff00'/%3E%3C/svg%3E&quot;); background-repeat: repeat;"></div>
 
   <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
     <div class="text-center mb-6 space-y-3">
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono font-bold uppercase">Disuasiones</span>
-      <h2 class="text-[clamp(1.7rem,3vw,2.3rem)] font-black text-white leading-tight">Así frustramos los últimos intentos de robo en la <span class="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">Región de O'Higgins</span></h2>
+      <h2 class="text-[clamp(1.7rem,3vw,2.3rem)] font-black text-white leading-tight">Así frustramos los últimos intentos de robo en la <span class="text-blue-400">Región de O'Higgins</span></h2>
       <p class="text-gray-400 text-base max-w-2xl mx-auto">Nuestro equipo de monitoreo ha frustrado cientos de intentos de robo. Cada alerta atendida es una propiedad protegida.</p>
     </div>
 
@@ -20,7 +19,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <article class="group bg-[#0A0D1A] border border-white/5 rounded-xl overflow-hidden hover:border-red-500/20 hover:-translate-y-1.5 transition-all duration-300">
+      <article class="group bg-card-bg border border-white/5 rounded-xl overflow-hidden hover:border-red-500/20 hover:-translate-y-1.5 transition-all duration-300">
         <div class="relative min-h-[200px] overflow-hidden cursor-pointer video-card" data-index="0">
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none"></div>
           <video class="w-full h-full object-cover" muted loop playsinline preload="metadata">
@@ -44,7 +43,7 @@
         </div>
       </article>
 
-      <article class="group bg-[#0A0D1A] border border-white/5 rounded-xl overflow-hidden hover:border-red-500/20 hover:-translate-y-1.5 transition-all duration-300">
+      <article class="group bg-card-bg border border-white/5 rounded-xl overflow-hidden hover:border-red-500/20 hover:-translate-y-1.5 transition-all duration-300">
         <div class="relative min-h-[200px] overflow-hidden cursor-pointer video-card" data-index="1">
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none"></div>
           <video class="w-full h-full object-cover" muted loop playsinline preload="metadata">
@@ -68,7 +67,7 @@
         </div>
       </article>
 
-      <article class="group bg-[#0A0D1A] border border-white/5 rounded-xl overflow-hidden hover:border-red-500/20 hover:-translate-y-1.5 transition-all duration-300">
+      <article class="group bg-card-bg border border-white/5 rounded-xl overflow-hidden hover:border-red-500/20 hover:-translate-y-1.5 transition-all duration-300">
         <div class="relative min-h-[200px] overflow-hidden cursor-pointer video-card" data-index="2">
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 pointer-events-none"></div>
           <video class="w-full h-full object-cover" muted loop playsinline preload="metadata">
@@ -93,7 +92,7 @@
       </article>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 p-8 bg-[#0A0D1A] border border-white/5 rounded-xl">
+    <div class="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 p-8 bg-card-bg border border-white/5 rounded-xl">
       <div class="text-center">
         <span class="block text-[1.8rem] font-black text-red-500 leading-none">+250</span>
         <span class="block text-sm text-gray-400 mt-1.5">Disuasiones este año</span>
